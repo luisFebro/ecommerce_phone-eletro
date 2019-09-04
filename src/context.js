@@ -7,7 +7,11 @@ class ProductProvider extends Component {
     state = {
         products: [],
         detailProduct: detailProduct,
+        cart: [],
+        modalOpen: false,
+        modalProduct: detailProduct,
     }
+
     componentDidMount() {
         this.setProducts();
     }
@@ -26,7 +30,8 @@ class ProductProvider extends Component {
     }
 
     getItem = id => {
-        const product = this.state.products.find(item => item.id === id);
+        const { products } = this.state;
+        const product = products.find(item => item.id === id);
         return product;
     }
 
@@ -38,7 +43,37 @@ class ProductProvider extends Component {
     }
 
     addToCart = id => {
-        console.log(`hello from add to cart. The id is ${id}`);
+        const { products, cart } = this.state;
+        let tempProducts = [...products];
+        const index = tempProducts.indexOf(this.getItem(id));
+        const product = tempProducts[index];
+        product.inCart = true;
+        product.count = 1;
+        const price = product.price;
+        product.total = price;
+
+        this.setState(() => {
+           return {products: tempProducts, cart: [...cart, product]};
+        });
+        /*
+        Insert this chunk of code (( } HERE );)) for testing and check the current state which is being rendered.
+        , () => {
+            console.log(this.state);
+        }
+        */
+    }
+
+    openModal = id => {
+        const product = this.getItem(id);
+        this.setState(()=> {
+            return {modalProduct: product, modalOpen: true}
+        })
+    }
+
+    closeModal = () => {
+        this.setState(() => {
+            return { modalOpen: false}
+        });
     }
 
     render() {
@@ -48,6 +83,8 @@ class ProductProvider extends Component {
                     ...this.state, //gets all the properties from objects listed in state
                     handleDetail: this.handleDetail,
                     addToCart: this.addToCart,
+                    openModal: this.openModal,
+                    closeModal: this.closeModal,
                 }}
                 >
                     {this.props.children}
