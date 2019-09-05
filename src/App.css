@@ -25,3 +25,25 @@ body {
 .text-light {
     color: var(--lightBlue);
 }
+
+/*CART BUTTON*/
+.btn-black {
+    background: transparent;
+    text-transform: capitalize;
+    font-size: 1.1rem !important;
+    color: var(--mainDark);
+    border-radius: 0 !important;
+    border: .1rem solid var(--mainDark) !important;
+}
+
+.btn-black:hover {
+    cursor: pointer;
+    background: var(--mainDark) !important;
+    color: var(--mainWhite) !important;
+}
+
+.cart-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--mainYellow);
+}
