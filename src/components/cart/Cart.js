@@ -5,8 +5,6 @@ import EmptyCart from './EmptyCart';
 import CartList from './CartList';
 import { ProductConsumer } from '../../context';
 import CardTotals from './CardTotals';
-// import {BrowserRouter as Router} from
-// 'react-router-dom';
 
 export default class Cart extends Component {
     render() {
@@ -21,7 +19,7 @@ export default class Cart extends Component {
                                     <Title name="your" title="cart" />
                                     <CartColumns />
                                     <CartList value={value} />
-                                    <CardTotals value={value} />
+                                    <CardTotals value={value} history={this.props.history}/>
                                 </React.Fragment>
                             );
                         } else {
